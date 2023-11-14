@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+
+<body>
+    <h1>Welcome, <%= username %>!</h1>
+    <form action="/send" method="post">
+        <label for="message">Send a message:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <h2>Chat History</h2>
+    <ul>
+        <% messages.forEach(msg=> { %>
+            <li><strong>
+                    <%= msg.username %>:
+                </strong>
+                <%= msg.message %>
+            </li>
+            <% }); %>
+    </ul>
+</body>
+
+</html>
