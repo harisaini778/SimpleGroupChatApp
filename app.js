@@ -57,6 +57,14 @@ app.post('/send', (req, res) => {
     res.redirect('/');
 });
 
+app.post('/contact', (req, res) => {
+    res.send('Contact form submitted successfully!');
+})
+
+app.get('/contact', (req, res) => {
+    res.render('contact');
+})
+
 function readMessages() {
     try {
         const data = fs.readFileSync('messages.txt', 'utf-8');
