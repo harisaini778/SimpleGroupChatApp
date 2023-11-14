@@ -11,6 +11,8 @@ const PORT = 5000;
 // Middleware to parse incoming request bodies (form data)
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
 app.use(cookieParser());
 
 // Set the view engine to EJS
