@@ -1,3 +1,5 @@
+<!-- /chat.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
 
 <body>
     <h1>Welcome, <%= username %>!</h1>
-    <form action="/send" method="post">
+    <form action="/chat" method="get">
         <label for="message">Send a message:</label>
         <input type="text" id="message" name="message" required>
         <button type="submit">Send</button>
