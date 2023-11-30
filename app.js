@@ -6,7 +6,8 @@ const chatController = require('./controllers/chatController');
 
 const app = express();
 const PORT = 5000;
-
+const db = require('./util/database');
+db.execute(`SELECT * FROM  products`);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('view engine', 'ejs');
