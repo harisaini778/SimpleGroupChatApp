@@ -1,3 +1,5 @@
+// /util/database.js
+
 const mysql = require('mysql');
 
 const pool = mysql.createPool({
@@ -7,6 +9,6 @@ const pool = mysql.createPool({
     password : "Sql123"
 })
 
-module.exports = pool.promise();
+module.exports = pool;
 
 

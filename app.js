@@ -1,13 +1,33 @@
+//app.js
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const chatController = require('./controllers/chatController');
-
+const db = require('./util/database');
+const util = require('util'); // Import util module
 const app = express();
 const PORT = 5000;
-const db = require('./util/database');
-db.execute(`SELECT * FROM  products`);
+
+// Promisify the query method
+const query = util.promisify(db.query).bind(db);
+
+// Wrap the database query in an asynchronous function
+const fetchData = async () => {
+  try {
+    const result = await query('SELECT * FROM `node-complete`.products');
+    console.log(result);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// Use an IIFE to immediately invoke the asynchronous function
+(async () => {
+  await fetchData();
+})();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set('view engine', 'ejs');
