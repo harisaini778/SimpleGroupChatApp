@@ -17,9 +17,10 @@ const query = util.promisify(db.query).bind(db);
 const fetchData = async () => {
   try {
     const result = await query('SELECT * FROM `node-complete`.products');
-    console.log(result);
+    return result || []; // Return an empty array if result is undefined
   } catch (err) {
     console.error(err);
+    return []; // Return an empty array in case of an error
   }
 };
 
@@ -27,6 +28,20 @@ const fetchData = async () => {
 (async () => {
   await fetchData();
 })();
+
+// Wrap the database query in an asynchronous function
+
+app.get('/', async (req, res) => {
+  try {
+    const products = await fetchData();
+    const username = req.cookies && req.cookies.username;
+
+    res.render('chat', { username: username, messages: [], products: products });
+  } catch (error) {
+    console.error('Error rendering chat page:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
